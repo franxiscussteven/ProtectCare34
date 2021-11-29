@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/5 Semester/NMP/ProtectCare34/app/src/main/res/layout/activity_main.xml" value="0.1743659420289855" />
-        <entry key="..\:/Project Kuliah/NMP/UAS/ProtectCare34/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/5 Semester/NMP/ProtectCare34/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/5 Semester/NMP/ProtectCare34/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/5 Semester/NMP/ProtectCare34/app/src/main/res/layout/fragment_checkin.xml" value="0.264" />
+        <entry key="..\:/5 Semester/NMP/ProtectCare34/app/src/main/res/layout/fragment_history.xml" value="0.2" />
+        <entry key="..\:/5 Semester/NMP/ProtectCare34/app/src/main/res/layout/fragment_profile.xml" value="0.16802536231884058" />
         <entry key="..\:/Project Kuliah/SEMESTER 5/NMP/UAS/ProtectCare34/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>
