@@ -16,16 +16,16 @@
     </style>
     <style name="Header1">
         <item name="fontFamily">@font/poppins_semibold</item>
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize">40sp</item>
     </style>
     <style name="SubHeader1">
         <item name="fontFamily">@font/pt_serif</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="Body">
         <item name="fontFamily">@font/pt_serif</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
 </resources>
