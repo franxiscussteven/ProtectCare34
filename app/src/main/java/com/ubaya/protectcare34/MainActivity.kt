@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         fragments.add(HistoryFragment())
         fragments.add(ProfileFragment())
 
-        viewPager.adapter =MyAdapter(this, fragments)
+        viewPager.adapter = MyAdapter(this, fragments)
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

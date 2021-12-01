@@ -1,10 +1,12 @@
 package com.ubaya.protectcare34
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +37,17 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fab.setOnClickListener{
+            val intent = Intent(context, LoginActivity::class.java)
+            activity?.startActivity(intent)
+            activity?.finish()
+        }
+        var username = activity?.intent?.getStringExtra(LoginActivity.toString())
+        textName.text = username
     }
 
     companion object {

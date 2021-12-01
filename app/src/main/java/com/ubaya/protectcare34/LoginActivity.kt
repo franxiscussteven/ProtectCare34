@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
+    companion object {
+        val EXTRA_USERNAME = "EXTRA_USERNAME"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -30,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
                     val obj = JSONObject(it)
                     if(obj.getString("result") == "success") {
                         val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra(EXTRA_USERNAME, username)
                         startActivity(intent)
                         finish()
                     }
