@@ -36,38 +36,34 @@ class CheckinFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-//        val queue = Volley.newRequestQueue(activity)
-//        val url = "https://ubaya.fun/native/160719019/get_places.php"
-//        val stringRequest = StringRequest(
-//            Request.Method.POST,
-//            url,
-//            Response.Listener {
-//                Log.d("apiresult", it)
-//                val obj = JSONObject(it)
-//                if (obj.getString("result") == "OK") {
-//                    val data = obj.getJSONArray("data")
-//                    for (i in 0 until data.length()) {
-//                        var placeObj = data.getJSONObject(i)
-//                        with(placeObj) {
-//                            var place = Place(
-//                                getInt("id"),
-//                                getString("name"),
-//                                getString("code")
-//                            )
-//                            GlobalData.places.add(place)
-//                        }
-//                    }
-//                }
-//            },
-//            Response.ErrorListener {
-//                Log.d("apierror", it.message.toString())
-//            }
-//        )
-//        queue.add(stringRequest)
-
-        val adapter = ArrayAdapter(this, R.layout.myspinner_layout, GlobalData.places)
-        adapter.setDropDownViewResource(R.layout.myspinner_item_layout)
-        spinnerPlace.adapter = adapter
+        val queue = Volley.newRequestQueue(activity)
+        val url = "https://ubaya.fun/native/160719019/get_places.php"
+        val stringRequest = StringRequest(
+            Request.Method.POST,
+            url,
+            Response.Listener {
+                Log.d("apiresult", it)
+                val obj = JSONObject(it)
+                if (obj.getString("result") == "OK") {
+                    val data = obj.getJSONArray("data")
+                    for (i in 0 until data.length()) {
+                        var placeObj = data.getJSONObject(i)
+                        with(placeObj) {
+                            var place = Place(
+                                getInt("id"),
+                                getString("name"),
+                                getString("code")
+                            )
+                            GlobalData.places.add(place)
+                        }
+                    }
+                }
+            },
+            Response.ErrorListener {
+                Log.d("apierror", it.message.toString())
+            }
+        )
+        queue.add(stringRequest)
     }
 
     override fun onCreateView(
@@ -76,6 +72,14 @@ class CheckinFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_checkin, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adapter = activity?.let { ArrayAdapter(it, R.layout.myspinner_layout, GlobalData.places) }
+        adapter?.setDropDownViewResource(R.layout.myspinner_item_layout)
+        spinnerPlace.adapter = adapter
+        adapter?.notifyDataSetChanged()
     }
 
     companion object {
