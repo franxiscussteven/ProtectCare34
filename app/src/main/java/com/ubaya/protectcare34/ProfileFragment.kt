@@ -2,11 +2,17 @@ package com.ubaya.protectcare34
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +28,7 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+//    var users: ArrayList<User> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +53,41 @@ class ProfileFragment : Fragment() {
             activity?.startActivity(intent)
             activity?.finish()
         }
-        var username = activity?.intent?.getStringExtra(LoginActivity.toString())
-        textName.text = username
+        var username = activity?.intent?.getStringExtra(LoginActivity.EXTRA_USERNAME).toString()
+//        user(username)
+        textName.text = "Name: $username"
     }
+
+//    fun user(username: String) {
+//        val queue = Volley.newRequestQueue(activity)
+//        val url = "https://ubaya.fun/native/160719019/get_user.php"
+//        val stringRequest = StringRequest(
+//            Request.Method.POST,
+//            url,
+//            Response.Listener {
+//                Log.d("apiresult", it)
+//                val obj = JSONObject(it)
+//                if (obj.getString("result") == "OK") {
+//                    val data = obj.getJSONArray("data")
+//                    for (i in 0 until data.length()) {
+//                        var placeObj = data.getJSONObject(i)
+//                        with(placeObj) {
+//                            var user = User(
+//                                getString("name"),
+//                                getInt("vaccine")
+//                            )
+//                            users.add(user)
+//                        }
+//                    }
+//                    Log.d("usercheck", users.toString())
+//                }
+//            },
+//            Response.ErrorListener {
+//                Log.d("apierror", it.message.toString())
+//            }
+//        )
+//        queue.add(stringRequest)
+//    }
 
     companion object {
         /**
