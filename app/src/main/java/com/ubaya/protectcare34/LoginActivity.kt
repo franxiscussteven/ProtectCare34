@@ -1,11 +1,55 @@
 package com.ubaya.protectcare34
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        buttonLogin.setOnClickListener {
+            var username = editUsername.text.toString()
+            var password = editPassword.text.toString()
+
+            val queue = Volley.newRequestQueue(this)
+            val url = "https://ubaya.fun/native/160719019/login.php"
+            val stringRequest = object : StringRequest(
+                Method.POST,
+                url,
+                Response.Listener {
+                    Log.d("checkparams", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "success") {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else
+                        Toast.makeText(this, "Incorrect Username Or Password!", Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Log.d("paramserror", it.message.toString())
+                }
+            ) {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params["username"] = username
+                    params["password"] = password
+
+                    return params
+                }
+            }
+            queue.add(stringRequest)
+
+        }
     }
 }

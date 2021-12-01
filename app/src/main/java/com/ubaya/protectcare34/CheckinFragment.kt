@@ -1,11 +1,18 @@
 package com.ubaya.protectcare34
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.fragment_checkin.*
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +36,38 @@ class CheckinFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+//        val queue = Volley.newRequestQueue(activity)
+//        val url = "https://ubaya.fun/native/160719019/get_places.php"
+//        val stringRequest = StringRequest(
+//            Request.Method.POST,
+//            url,
+//            Response.Listener {
+//                Log.d("apiresult", it)
+//                val obj = JSONObject(it)
+//                if (obj.getString("result") == "OK") {
+//                    val data = obj.getJSONArray("data")
+//                    for (i in 0 until data.length()) {
+//                        var placeObj = data.getJSONObject(i)
+//                        with(placeObj) {
+//                            var place = Place(
+//                                getInt("id"),
+//                                getString("name"),
+//                                getString("code")
+//                            )
+//                            GlobalData.places.add(place)
+//                        }
+//                    }
+//                }
+//            },
+//            Response.ErrorListener {
+//                Log.d("apierror", it.message.toString())
+//            }
+//        )
+//        queue.add(stringRequest)
 
+        val adapter = ArrayAdapter(this, R.layout.myspinner_layout, GlobalData.places)
+        adapter.setDropDownViewResource(R.layout.myspinner_item_layout)
+        spinnerPlace.adapter = adapter
     }
 
     override fun onCreateView(
