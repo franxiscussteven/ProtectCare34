@@ -54,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             queue.add(stringRequest)
-
         }
     }
 }

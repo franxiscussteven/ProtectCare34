@@ -1,5 +1,6 @@
 package com.ubaya.protectcare34
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,10 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_checkin.*
 import org.json.JSONObject
 
@@ -28,6 +33,7 @@ class CheckinFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    val fragments: ArrayList<Fragment> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,9 +86,47 @@ class CheckinFragment : Fragment() {
         adapter?.setDropDownViewResource(R.layout.myspinner_item_layout)
         spinnerPlace.adapter = adapter
         adapter?.notifyDataSetChanged()
+
+        buttonCheckin.setOnClickListener {
+            var place = spinnerPlace.selectedItem.toString()
+            var code = editCode.text.toString()
+
+            val queue = Volley.newRequestQueue(context)
+            val url = "https://ubaya.fun/native/160719019/checkin.php"
+            val stringRequest = object : StringRequest(
+                Method.POST,
+                url,
+                Response.Listener {
+                    Log.d("checkparams", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "success") {
+                        Toast.makeText(context, "Berhasil!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(context, MainActivity::class.java)
+                        intent.putExtra(EXTRA_CHECK, "masuk")
+                        startActivity(intent)
+                    }
+                    else
+                        Toast.makeText(context, "Incorrect Unique Code!", Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(context, "You must vaccinated at least once!", Toast.LENGTH_SHORT).show()
+                }
+            ) {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params["name"] = place
+                    params["code"] = code
+                    params["vaccine"] = GlobalData.user.vaccine.toString()
+
+                    return params
+                }
+            }
+            queue.add(stringRequest)
+        }
     }
 
     companion object {
+        val EXTRA_CHECK = "EXTRA_CHECK"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
