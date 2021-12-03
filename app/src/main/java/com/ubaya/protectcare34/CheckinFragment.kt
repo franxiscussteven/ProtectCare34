@@ -18,6 +18,10 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_checkin.*
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,9 +94,11 @@ class CheckinFragment : Fragment() {
         buttonCheckin.setOnClickListener {
             var place = spinnerPlace.selectedItem.toString()
             var code = editCode.text.toString()
+            var id = spinnerPlace.selectedItemPosition.toString()
 
             val queue = Volley.newRequestQueue(context)
             val url = "https://ubaya.fun/native/160719019/checkin.php"
+//            val url = "https://ubaya.fun/native/160719019/test.php"
             val stringRequest = object : StringRequest(
                 Method.POST,
                 url,
@@ -104,6 +110,7 @@ class CheckinFragment : Fragment() {
                         val intent = Intent(context, MainActivity::class.java)
                         intent.putExtra(EXTRA_CHECK, "masuk")
                         startActivity(intent)
+                        activity?.finish()
                     }
                     else
                         Toast.makeText(context, "Incorrect Unique Code!", Toast.LENGTH_SHORT).show()
@@ -117,6 +124,8 @@ class CheckinFragment : Fragment() {
                     params["name"] = place
                     params["code"] = code
                     params["vaccine"] = GlobalData.user.vaccine.toString()
+                    params["users_id"] = GlobalData.user.id.toString()
+                    params["places_id"] = id
 
                     return params
                 }
