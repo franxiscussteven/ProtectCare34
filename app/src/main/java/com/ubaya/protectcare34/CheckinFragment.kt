@@ -46,6 +46,10 @@ class CheckinFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+        val select = Place(0, "Select a place..", "000")
+        GlobalData.places.clear()
+        GlobalData.places.add(select)
+
         val queue = Volley.newRequestQueue(activity)
         val url = "https://ubaya.fun/native/160719019/get_places.php"
         val stringRequest = StringRequest(
@@ -98,7 +102,6 @@ class CheckinFragment : Fragment() {
 
             val queue = Volley.newRequestQueue(context)
             val url = "https://ubaya.fun/native/160719019/checkin.php"
-//            val url = "https://ubaya.fun/native/160719019/test.php"
             val stringRequest = object : StringRequest(
                 Method.POST,
                 url,
@@ -106,7 +109,7 @@ class CheckinFragment : Fragment() {
                     Log.d("checkparams", it)
                     val obj = JSONObject(it)
                     if(obj.getString("result") == "success") {
-                        Toast.makeText(context, "Berhasil!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Check In!", Toast.LENGTH_SHORT).show()
                         val intent = Intent(context, MainActivity::class.java)
                         intent.putExtra(EXTRA_CHECK, "masuk")
                         startActivity(intent)

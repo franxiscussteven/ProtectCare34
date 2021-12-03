@@ -14,6 +14,7 @@ import org.json.JSONObject
 class LoginActivity : AppCompatActivity() {
     companion object {
         val EXTRA_USERNAME = "EXTRA_USERNAME"
+        val EXTRA_STATUS = "EXTRA_STATUS"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         buttonLogin.setOnClickListener {
             var username = editUsername.text.toString()
             var password = editPassword.text.toString()
+            var status = ""
 
             val queue = Volley.newRequestQueue(this)
             val url = "https://ubaya.fun/native/160719019/login.php"
@@ -33,8 +35,16 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("checkparams", it)
                     val obj = JSONObject(it)
                     if(obj.getString("result") == "success") {
+                        val data = obj.getJSONArray("data")
+                        for (i in 0 until data.length()) {
+                            var placeObj = data.getJSONObject(i)
+                            with(placeObj) {
+                                status = getString("status")
+                            }
+                        }
                         val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra(EXTRA_USERNAME, username)
+                        intent.putExtra(EXTRA_STATUS, status)
                         startActivity(intent)
                         finish()
                     }

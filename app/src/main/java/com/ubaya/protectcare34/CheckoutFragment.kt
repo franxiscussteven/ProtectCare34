@@ -1,10 +1,20 @@
 package com.ubaya.protectcare34
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.fragment_checkin.*
+import kotlinx.android.synthetic.main.fragment_checkout.*
+import kotlinx.android.synthetic.main.fragment_profile.*
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +45,43 @@ class CheckoutFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_checkout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        textPlace.text = GlobalData.checkout.placename
+//        textCheckin.text = "Check in time: " + GlobalData.checkout.checkin
+        buttonCheckout.setOnClickListener {
+            val queue = Volley.newRequestQueue(context)
+            val url = "https://ubaya.fun/native/160719019/checkout.php"
+            val stringRequest = object : StringRequest(
+                Method.POST,
+                url,
+                Response.Listener {
+                    Log.d("checkparams", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "success") {
+                        Toast.makeText(context, "Check Out!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(context, MainActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                    else
+                        Toast.makeText(context, "Failed!", Toast.LENGTH_SHORT).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(context, "Error Failed!", Toast.LENGTH_SHORT).show()
+                }
+            ) {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params["users_id"] = GlobalData.user.id.toString()
+
+                    return params
+                }
+            }
+            queue.add(stringRequest)
+        }
     }
 
     companion object {
