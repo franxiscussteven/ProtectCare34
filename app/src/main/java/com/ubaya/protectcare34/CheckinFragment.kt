@@ -109,9 +109,9 @@ class CheckinFragment : Fragment() {
                     Log.d("checkparams", it)
                     val obj = JSONObject(it)
                     if(obj.getString("result") == "success") {
+                        GlobalData.status = "checkin"
                         Toast.makeText(context, "Check In!", Toast.LENGTH_SHORT).show()
                         val intent = Intent(context, MainActivity::class.java)
-                        intent.putExtra(EXTRA_CHECK, "masuk")
                         startActivity(intent)
                         activity?.finish()
                     }
@@ -138,7 +138,6 @@ class CheckinFragment : Fragment() {
     }
 
     companion object {
-        val EXTRA_CHECK = "EXTRA_CHECK"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

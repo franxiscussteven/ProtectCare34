@@ -51,6 +51,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fab.setOnClickListener{
+            GlobalData.places.clear()
+            GlobalData.user = User(0,"", 0)
+            GlobalData.checkout = Checkout(0, "", "")
+            GlobalData.status = ""
+            GlobalData.username = ""
             val intent = Intent(context, LoginActivity::class.java)
             activity?.startActivity(intent)
             activity?.finish()

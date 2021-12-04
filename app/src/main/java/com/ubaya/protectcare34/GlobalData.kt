@@ -5,4 +5,5 @@ object GlobalData {
     var user = User(0,"", 0)
     var checkout = Checkout(0, "", "")
     var status = ""
+    var username = ""
 }

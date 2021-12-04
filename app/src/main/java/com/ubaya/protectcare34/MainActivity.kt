@@ -1,5 +1,6 @@
 package com.ubaya.protectcare34
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,19 +23,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        var num = intent.getStringExtra(CheckinFragment.EXTRA_CHECK).toString()
-//
-//        if(num == "masuk")
-//            fragments.add(CheckoutFragment())
-//        else
-//            fragments.add(CheckinFragment())
-
-        var username = intent.getStringExtra(LoginActivity.EXTRA_USERNAME).toString()
+//        var username = intent.getStringExtra(LoginActivity.EXTRA_USERNAME).toString()
+        var username = GlobalData.username
         user(username)
-        var status = intent.getStringExtra(LoginActivity.EXTRA_STATUS).toString()
-        Toast.makeText(this, "$status", Toast.LENGTH_SHORT).show()
 
-        if(status == "checkin")
+        if(GlobalData.status == "checkin")
             fragments.add(CheckoutFragment())
         else
             fragments.add(CheckinFragment())
@@ -78,9 +71,6 @@ class MainActivity : AppCompatActivity() {
                             GlobalData.user.name = getString("name")
                             GlobalData.user.vaccine = getInt("vaccine")
                         }
-                        Log.d("usercheck", GlobalData.user.id.toString())
-                        Log.d("usercheck", GlobalData.user.name.toString())
-                        Log.d("usercheck", GlobalData.user.vaccine.toString())
                     }
                     var id = GlobalData.user.id
                     check(id)
@@ -100,7 +90,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun check(user: Int) {
-        var checked = ""
         val queue = Volley.newRequestQueue(this)
         val url = "https://ubaya.fun/native/160719019/check.php"
         val stringRequest = object : StringRequest(
@@ -117,17 +106,18 @@ class MainActivity : AppCompatActivity() {
                             GlobalData.checkout.id = getInt("id")
                             GlobalData.checkout.checkin = getString("checkin")
                             GlobalData.checkout.placename = getString("name")
-//                            GlobalData.status = "out"
                         }
                     }
                     textPlace.text = GlobalData.checkout.placename
                     textCheckin.text = "Check in time: " + GlobalData.checkout.checkin
-
+                    if(GlobalData.user.vaccine == 1)
+                        cardCheckout.setBackgroundColor(Color.parseColor("Yellow"))
+                    else if(GlobalData.user.vaccine == 2)
+                        cardCheckout.setBackgroundColor(Color.parseColor("Green"))
                 }
             },
             Response.ErrorListener {
                 Log.d("paramserror", it.message.toString())
-//                GlobalData.status = "in"
             }
         )
         {
@@ -139,12 +129,4 @@ class MainActivity : AppCompatActivity() {
         }
         queue.add(stringRequest)
     }
-
-//    fun addfragment(status: String)
-//    {
-//        if(status == "add")
-//            fragments.add(CheckoutFragment())
-//        else
-//            fragments.add(CheckinFragment())
-//    }
 }

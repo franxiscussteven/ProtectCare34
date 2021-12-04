@@ -1,6 +1,7 @@
 package com.ubaya.protectcare34
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -49,8 +50,12 @@ class CheckoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        textPlace.text = GlobalData.checkout.placename
-//        textCheckin.text = "Check in time: " + GlobalData.checkout.checkin
+
+//        if(GlobalData.user.vaccine == 1)
+//            cardCheckout.setBackgroundColor(Color.parseColor("Yellow"))
+//        else if(GlobalData.user.vaccine == 2)
+//            cardCheckout.setBackgroundColor(Color.parseColor("Green"))
+
         buttonCheckout.setOnClickListener {
             val queue = Volley.newRequestQueue(context)
             val url = "https://ubaya.fun/native/160719019/checkout.php"
@@ -61,6 +66,7 @@ class CheckoutFragment : Fragment() {
                     Log.d("checkparams", it)
                     val obj = JSONObject(it)
                     if(obj.getString("result") == "success") {
+                        GlobalData.status = "checkout"
                         Toast.makeText(context, "Check Out!", Toast.LENGTH_SHORT).show()
                         val intent = Intent(context, MainActivity::class.java)
                         startActivity(intent)

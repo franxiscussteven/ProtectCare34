@@ -13,8 +13,7 @@ import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
     companion object {
-        val EXTRA_USERNAME = "EXTRA_USERNAME"
-        val EXTRA_STATUS = "EXTRA_STATUS"
+//        val EXTRA_USERNAME = "EXTRA_USERNAME"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +41,10 @@ class LoginActivity : AppCompatActivity() {
                                 status = getString("status")
                             }
                         }
+                        GlobalData.status = status
+                        GlobalData.username = username
                         val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra(EXTRA_USERNAME, username)
-                        intent.putExtra(EXTRA_STATUS, status)
+//                        intent.putExtra(EXTRA_USERNAME, username)
                         startActivity(intent)
                         finish()
                     }
