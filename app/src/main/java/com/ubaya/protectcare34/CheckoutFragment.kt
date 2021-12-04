@@ -51,11 +51,6 @@ class CheckoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        if(GlobalData.user.vaccine == 1)
-//            cardCheckout.setBackgroundColor(Color.parseColor("Yellow"))
-//        else if(GlobalData.user.vaccine == 2)
-//            cardCheckout.setBackgroundColor(Color.parseColor("Green"))
-
         buttonCheckout.setOnClickListener {
             val queue = Volley.newRequestQueue(context)
             val url = "https://ubaya.fun/native/160719019/checkout.php"

@@ -28,6 +28,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="Where to check in?"
+            android:textAppearance="@style/Body"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Ask the security officers where you want to check in for the unique code. The unique code consists of 4 numbers."
+            android:textAppearance="@style/Body"
             app:layout_constraintEnd_toEndOf="@+id/textCode"
             app:layout_constraintStart_toStartOf="@+id/textCode"
             app:layout_constraintTop_toBottomOf="@+id/textCode" />
