@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Check Out"
-                android:textAppearance="@style/Header1"
+                android:textAppearance="@style/Header1_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="You are currently checked in at:"
-                android:textAppearance="@style/Body"
+                android:textAppearance="@style/Body_card"
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Universitas Surabaya"
-                android:textAppearance="@style/SubHeader1"
+                android:textAppearance="@style/SubHeader1_card"
                 app:layout_constraintEnd_toEndOf="@+id/textView11"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -57,7 +57,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Check in time:"
-                android:textAppearance="@style/Body"
+                android:textAppearance="@style/Body_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPlace" />
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Before leaving, make sure to bring your belongings and keep following the health protocols. \nYou cannot check in to another place before you check out from this loaction."
-                android:textAppearance="@style/Body"
+                android:textAppearance="@style/Body_card"
                 app:layout_constraintEnd_toEndOf="@+id/textCheckin"
                 app:layout_constraintStart_toStartOf="@+id/textCheckin"
                 app:layout_constraintTop_toBottomOf="@+id/textCheckin" />
