@@ -28,4 +28,18 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="Header1_card">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+    <style name="SubHeader1_card">
+        <item name="fontFamily">@font/pt_serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="Body_card">
+        <item name="fontFamily">@font/pt_serif</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>
