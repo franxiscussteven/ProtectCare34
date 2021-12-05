@@ -109,13 +109,13 @@ class MainActivity : AppCompatActivity() {
                             GlobalData.checkout.num = getInt("num_vaccines")
                         }
                     }
-                    textPlace.text = GlobalData.checkout.placename
-                    textCheckin.text = "Check in time: " + GlobalData.checkout.checkin
+                    textPlace?.text = GlobalData.checkout.placename
+                    textCheckin?.text = "Check in time: " + GlobalData.checkout.checkin
 
                     if(GlobalData.checkout.num == 1)
                         cardCheckout.setBackgroundColor(Color.parseColor("Yellow"))
                     else if(GlobalData.checkout.num == 2)
-                        cardCheckout.setBackgroundColor(Color.parseColor("Green"))
+                        cardCheckout?.setBackgroundColor(Color.parseColor("Green"))
                 }
             },
             Response.ErrorListener {

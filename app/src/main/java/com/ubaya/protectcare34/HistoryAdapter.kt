@@ -27,8 +27,13 @@ class HistoryAdapter(val histories:ArrayList<History>) :
         val history = histories[position]
         with(holder.view) {
             textLocation.text = history.place
-            textCheckIn.text = history.checkin
-            textCheckOut.text = history.checkout
+            val checkin = history.checkin
+            textCheckIn.text = "Check in: $checkin"
+            val checkout = history.checkout
+            if(checkout == "null")
+                textCheckOut.text = "Check out: Not yet checked out"
+            else
+                textCheckOut.text = "Check out: $checkout"
             val num_vac = history.num
             if(num_vac==1)
                 cardHistory.setBackgroundColor(Color.parseColor("Yellow"))
