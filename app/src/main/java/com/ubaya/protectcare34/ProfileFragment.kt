@@ -1,5 +1,7 @@
 package com.ubaya.protectcare34
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -51,14 +53,23 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fab.setOnClickListener{
-            GlobalData.places.clear()
-            GlobalData.user = User(0,"", 0)
-            GlobalData.checkout = Checkout(0, "", "", 0)
-            GlobalData.status = ""
-            GlobalData.username = ""
-            val intent = Intent(context, LoginActivity::class.java)
-            activity?.startActivity(intent)
-            activity?.finish()
+            val builder = AlertDialog.Builder(context)
+            with(builder) {
+                setTitle("Log Out")
+                setMessage("Are you sure want to quit this app?")
+                setPositiveButton("Yes", DialogInterface.OnClickListener { _, i ->
+                    GlobalData.places.clear()
+                    GlobalData.user = User(0,"", 0)
+                    GlobalData.checkout = Checkout(0, "", "", 0)
+                    GlobalData.status = ""
+                    GlobalData.username = ""
+                    val intent = Intent(context, LoginActivity::class.java)
+                    activity?.startActivity(intent)
+                    activity?.finish()
+                })
+                setNegativeButton("No", null)
+                create().show()
+            }
         }
         textName.text = "Name: " + GlobalData.user.name
         textVaccine.text = "Number of vaccination doses: " + GlobalData.user.vaccine
